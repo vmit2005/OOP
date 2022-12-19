@@ -1,4 +1,4 @@
-class triangle:
+class Triangle:
     """
     plus
     get_count
@@ -13,44 +13,45 @@ class triangle:
 
     @staticmethod
     def plus():
-        triangle.__count += 1
+        Triangle.__count += 1
         # print(triangle.__count)
 
     @staticmethod
     def get_count():
-        return triangle.__count
+        return Triangle.__count
 
-    @staticmethod
-    def null_count():
-        triangle.__count = 0
+    # @staticmethod
+    # def null_count():
+    #     Triangle.__count = 0
 
     @staticmethod
     def geron(a, b, c):
         p = (a + b + c) / 2
         s = (p * (p - a) * (p - b) * (p - c)) ** 0.5
-        triangle.plus()
+        Triangle.plus()
+
         return s
 
     @staticmethod
     def square(a, h):
         s = a * h / 2
-        triangle.plus()
+        Triangle.plus()
         return s
 
     @staticmethod
     def kvadro(a):
-        triangle.plus()
+        Triangle.plus()
         return a ** 2
 
     @staticmethod
     def regtangle(a, b):
-        triangle.plus()
+        Triangle.plus()
         return a * b
 
 
-print(triangle.geron(3, 4, 5))
-print(triangle.square(6, 8))
-print(triangle.kvadro(7))
-print(triangle.regtangle(7, 10))
-print("Число вызовов функций- ", triangle.get_count())
-print(triangle.__doc__)
+print(Triangle.geron(3, 4, 5))
+print(Triangle.square(6, 8))
+print(Triangle.kvadro(7))
+print(Triangle.regtangle(7, 10))
+print("Число вызовов функций- ", Triangle.get_count())
+print(Triangle.__doc__)
