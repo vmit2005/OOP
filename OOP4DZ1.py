@@ -114,6 +114,8 @@ class Account:
         else:
             print('Новое значение не принято')
 
+
+
 acc = Account('12345', 'Долгих', 0.03, 1000)
 acc.print_balance()
 acc.print_info()
