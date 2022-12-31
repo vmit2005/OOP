@@ -969,47 +969,512 @@ import asyncio
 #
 #
 # line = Line(Point(1, 2), Point(10, 20))
+# # line.draw_line()
+# # line.set_coords(Point(20,40),Point(60,50))
+# # line.draw_line()
+# # line.set_coords(Point(111,40),Point(60,50))
+# # line.draw_line()
+#
+# #
+# #
+# #
+# # Абстрактные методы
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f"({self.__x}, {self.__y})"
+#
+#     def is_int(self):
+#         if not isinstance(self.__x, int) or not isinstance(self.__y, int):
+#             print("Координаты должны быть целочисленными")
+#             return False
+#         return True
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = "red", width: int = 1):
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#
+#     def draw(self):
+#         raise NotImplementedError("В дочернем классе  должен быть определен метод draw()")
+#
+#
+# class Line(Prop):
+#     def draw_line(self):
+#         print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
+#     pass
+#
+#
+# line = Line(Point(1, 2), Point(10, 20))
 # line.draw_line()
-# line.set_coords(Point(20,40),Point(60,50))
-# line.draw_line()
-# line.set_coords(Point(111,40),Point(60,50))
-# line.draw_line()
+#
+# Абстрактный метод объявлен но не реализован.
+# =====================================================================
+# Задача  Table
+# from math import pi
+# class Table:
+#     def __init__(self,width=None,length=None,radius=None):
+#         if radius is None:
+#             self._width=width
+#             self._length=(width if length is None else length)
+#         else:
+#             self._radius=radius
+#
+#     def calc_area(self):
+#         raise NotImplementedError("В дочернем классе должен быть опеределен метод Calc_area()")
+#
+# class SqTable(Table):
+#     def calc_area(self):
+#         return self._width*self._length
+#
+# class RoundTable(Table):
+#     def calc_area(self):
+#         return round(pi*
+#                      self._radius**2, 2)
+#
+# t=SqTable(20,10)
+# print(t.__dict__)
+# print(t.calc_area())
+# t1=RoundTable(radius=20)
+# print(t1.__dict__)
+# print(t1.calc_area())
+# t2=SqTable(20)
+# print(t2.__dict__)
+# print(t2.calc_area())
+# =========================================================
+# =========================================================
+#
+# from abc import ABC, abstractmethod
+# class Chess(ABC):
+#     def draw(self):
+#         print("Yfhbcjdfk шахматную фигуру")
+#
+#     @abstractmethod
+#     def move(self):
+#         print("Переместил шахматную")
+#         pass
+# class Queen(shess)
+#     pass
+#
+# from abc import ABC, abstractmethod
+#
+#
+# class Currency(ABC):
+#     def __init__(self, value):
+#         self.value = value
+#
+#     @abstractmethod
+#     def convert_to_rub(self):
+#         pass
+#
+#     # @abstractmethod
+#     def print_value(self):
+#         print(self.value, end=" ")
+#
+#
+# class Dollar(Currency):
+#     rate_to_rub = 74.16
+#     suffix = "USD"
+#
+#     def convert_to_rub(self):
+#         rub = self.value * Dollar.rate_to_rub
+#         return rub
+#
+#     def print_value(self):
+#         super().print_value()
+#         print(Dollar.suffix, end=" ")
+#
+#
+# class Euro(Currency):
+#     rate_to_rub =80.11
+#     suffix = "EUR"
+#
+#     def convert_to_rub(self):
+#         rub = self.value * Euro.rate_to_rub
+#         return rub
+#
+#     def print_value(self):
+#         super().print_value()
+#         print(Euro.suffix, end=" ")
+#
+#
+# d = [Dollar(5), Dollar(10), Dollar(50), Dollar(100)]
+# print("*" * 50)
+# for elem in d:
+#     elem.print_value()
+#     print(f' - {elem.convert_to_rub():.2f}RUB')
+#
+#
+# e = [Euro(5), Euro(10), Euro(50), Euro(100)]
+# print("*" * 50)
+# for elem in e:
+#     elem.print_value()
+#     print(f' - {elem.convert_to_rub():.2f}RUB')
+#
+#
+# from abc import ABC, abstractmethod
+#
+#
+# class Father(ABC):
+#
+#     @abstractmethod
+#     def display(self):
+#         pass
+#
+#     @abstractmethod
+#     def display2(self):
+#         pass
+#
+#
+# class Child(Father):
+#     def display(self):
+#         print("дочерний класс")
+#
+#
+# class GrandChild(Child):
+#     def display2(self):
+#         print("Внучатый класс")
+#
+#
+# gc = GrandChild()
+# gc.display2()
+#
+#
+#
+# class MyGuter:
+#     age=18
+#     def __init__(self,name):
+#         self.name=name
+#
+#     @staticmethod
+#     def outer_class_metod():
+#         print("Я метод внешнего класса")
+#
+#     def outer_obj_method(self):
+#         print("Связующий метод")
+#
+#     class MyInner:
+#         def __init__(self,inner_mame):
+#             self.inner_name=inner_mame
+#
+#         def inner_metod(self):
+#             print("Я метод вложенного класс")
+#             MyGuter.outer_class_metod()
+#
+# out = MyGuter('Внешний')
+# inner=out.MyInner("внутренний")
+# print(inner.inner_name)
+# inner.inner_metod()
+#
+#
+# #
+# class Color:
+#         def __init__(self):
+#             self.name="Green"
+#             self.lg=self.LightGreen()
+#
+#         def show(self):
+#             print("Name:",self.name)
+#
+#         class LightGreen:
+#             def __init__(self):
+#                 self.name="Light green"
+#                 self.code="024avc"
+#
+#             def display(self):
+#                 print("Name:",self.name)
+#                 print("Code",self.code)
+#
+#
+# outer=Color()
+# outer.show()
+# g=outer.lg
+# g.display()
+# g.name="Red"
+# g.display()
+# f=outer.lg
+# f.display()
+# class Intern:
+#     def __init__(self):
+#         self.name = "Smith"
+#         self.id = '765'
+#
+#     def display(self):
+#         print("Name", self.name)
+#         print(self.id)
+# class Employee:
+#     def __init__(self):
+#         self.name = "Employee"
+#         self.intern = Intern()
+#         self.head = self.Head()
+#
+#     def show(self):
+#         print("Name", self.name)
+#
+#
+#     class Head:
+#
+#         def __init__(self):
+#             self.name = "Alba"
+#             self.id = '007'
+#
+#         def display(self):
+#             print("Name", self.name)
+#             print("Id", self.id)
+#
+#
+# outer = Employee()
+# outer.show()
+# d1 = outer.intern
+# print()
+# d1.display()
+#
+# d2 = outer.head
+# d2.display()
+
+
+#
+# \
+# class Computer:
+#     def __init__(self,name,os1,):
+#         self.mane=name
+#         self.os=self.OS(title=os1)
+#         self.cpu=self.CPU(brand,model)
+#
+#     class OS:
+#         def __init__(self,title):
+#             self.title=title
+#
+#         def system(self):
+#             return "Win 10"
+#
+#     class CPU:
+#         def __init__(self,brand,model):
+#             self.brand=brand
+#             self.model=model
+#
+#         def make(self):
+#             return "Intel"
+#
+#         def model(self,model):
+#             return model
+#
+# comp=Computer("sis1","вит","Intel","core-i7")
+# my_os=comp.os
+# my_cpu=comp.cpu
+#
+# print(comp.mane)
+# print(comp.os.system())
+# print(comp.cpu.make())
+# print(comp.cpu.model("Core -i5"))
+
+# class Base:
+#     def __init__(self):
+#         self.db=self.Inner()
+#
+#     def display(self):
+#         print("in Base clas")
+#
+#     class Inner:
+#         def display1(self):
+#             print("Inner of Base Class")
+#
+# class Subclass(Base):
+#     def __init__(self):
+#         print ("iN subclass")
+#         super().__init__()
+#
+#     class Inner(Base.Inner):
+#         def display2(self):
+#             print("Inner ofs sub Class")
+#
+# a=Subclass()
+# a.display()
+#
+# b=a.db
+# b.display1()
+# b.display2()
 
 #
 #
 #
-# Абстрактные методы
-class Point:
-    def __init__(self, x=0, y=0):
-        self.__x = x
-        self.__y = y
+#
+# Множественное наследование
+# class Creature:
+#     def __init__(self,name):
+#         self.name = name
+#
+#
+# class Animal:
+#     def sleep(self):
+#         print(self.name + "is slip")
+#
+#
+# class Pet(Creature):
+#     def play(self):
+#         print(self.name + "isplayeng")
+#
+#
+# class Dog(Animal, Pet):
+#     def bark(self):
+#         print(self.name + "is barkinng")
+#
+#
+# beast = Dog("Buddy")
+# beast.bark()
+# beast.play()
+# beast.sleep()
 
-    def __str__(self):
-        return f"({self.__x}, {self.__y})"
+# class A:
+#     def __init__(self):
+#         print("A")
+#
+#
+# class B(A):
+#     def __init__(self):
+#
+#         print("B")
+#
+#     def hi(self):
+#         print('B,Hi')
+#
+#
+# class C(A):
+#     def __init__(self):
+#         print("C")
+#
+#     def hi(self):
+#         print('C,Hi')
+#
+#
+# class D(B,C):
+#     def __init__(self):
+#         B.__init__(self)
+#         C.__init__(self)
+#
+#         print("D")
+#
+#     def hi(self):
+#         C.hi(self)
+#         print("D,Hi")
+#
+#
+#
+# d = D()
+# d.hi()
+# print(D.mro())
 
-    def is_int(self):
-        if not isinstance(self.__x, int) or not isinstance(self.__y, int):
-            print("Координаты должны быть целочисленными")
-            return False
-        return True
+
+#
+# class B():
+#     def __init__(self):
+#
+#         print("B")
+#
+#     def hi(self):
+#         print('B,Hi')
+#
+#
+# class C():
+#     def __init__(self):
+#         print("C")
+#
+#     def hi(self):
+#         print('C,Hi')
+#
+#
+# class D(B,C):
+#     def __init__(self):
+#         B.__init__(self)
+#         C.__init__(self)
+#
+#         print("D")
+# #
+# #     def hi(self):
+# #         C.hi(self)
+# #         print("D,Hi")
+# #
+# #
+# #
+# # d = D()
+# # d.hi()
+# # print(D.mro())
+#
+# class AA():
+#     pass
+#
+# class A(AA):
+#     pass
+#
+# class Point(A):
+#     def __init__(self, x=0, y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#         return f"({self.x},{self.y})"
+#
+#
+# class Style:
+#     def __init__(self, color="red", width=1):
+#         print("Иницифлизатор Style")
+#         self._color = color
+#         self._width = width
+#
+#
+# class Pos:
+#     def __init__(self, sp: Point, ep: Point, * args):
+#         print("Инициализатор pos")
+#         self._sp = sp
+#         self.ep = ep
+#         super().__init__(*args)
+#
+#
+# class Line(Pos, Style):
+#     # def __init__(self, sp: Point, ep: Point, color="red", width=1):
+#     #     Pos.__init__(self, sp, ep)
+#     #     Style.__init__(self, color, width)
+#
+#     def draw(self):
+#         print(f"Рисование линии {self._sp},{self.ep},{self._color},{self._width}")
+#
+#
+# l1 = Line(Point(10, 10), Point(100, 100), "green", 5)
+# l1.draw()
+# print(Line.__mro__)
+# print(Point.mro())
+#
+#
+# Миксины (примеси)
+#
+#
+class Displayer:
+    @staticmethod
+    def display(message):
+        print(message)
 
 
-class Prop:
-    def __init__(self, sp: Point, ep: Point, color: str = "red", width: int = 1):
-        self._sp = sp
-        self._ep = ep
-        self._color = color
-        self._width = width
+class Loggermexin:
+    def log(self, message, filename='logfile.txt'):
+        with open(filename, 'a') as fh:
+            fh.write(message)
 
-    def draw(self):
-        raise NotImplementedError("В дочернем классе  должен быть определен метод draw()")
-
-
-class Line(Prop):
-    def draw_line(self):
-        print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
-    pass
+    def display(self, message):
+        Displayer.display(message)
+        self.log(message)
 
 
-line = Line(Point(1, 2), Point(10, 20))
-line.draw_line()
+class MySubClass(Loggermexin, Displayer):
+    def log(selfself, message, filename=""):
+        super().log(message, filename="subclass.txt")
+
+
+sub = MySubClass()
+sub.display("Cтрока будет отоброжаться и регистрироваться в файле ")
+print(MySubClass.mro())
