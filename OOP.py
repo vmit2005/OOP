@@ -92,6 +92,7 @@
 # Point.set_coord(p2,7,14)
 # print(p2.x)
 import asyncio
+import math
 
 
 # class Humam:
@@ -1454,27 +1455,489 @@ import asyncio
 # Миксины (примеси)
 #
 #
-class Displayer:
-    @staticmethod
-    def display(message):
-        print(message)
+# class Displayer:
+#     @staticmethod
+#     def display(message):
+#         print(message)
+#
+#
+# class Loggermexin:
+#     def log(self, message, filename='logfile.txt'):
+#         with open(filename, 'a') as fh:
+#             fh.write(message)
+#
+#     def display(self, message):
+#         Displayer.display(message)
+#         self.log(message)
+#
+#
+# class MySubClass(Loggermexin, Displayer):
+#     def log(selfself, message, filename=""):
+#         super().log(message, filename="subclass.txt")
+#
+#
+# sub = MySubClass()
+# sub.display("Cтрока будет отоброжаться и регистрироваться в файле ")
+# print(MySubClass.mro())
+#
+#
+#
+#
+# class Goods:
+#     def __init__(self, name, weight,price):
+#         super().__init__()
+#         print("Inut GOODs")
+#         self.name=name
+#         self.weight=weight
+#         self.price=price
+#
+#     def print_info(self):
+#         print(f"{self.name}, {self.weight}, {self.price}")
+#
+# class MixinLog:
+#     ID=0
+#     def __init__(self):
+#         print("init Mixinlog")
+#         self.ID+=1
+#         self.id=self.ID
+#
+#     def save_sell_log(self):
+#         print(f"{self.id}:товар был продан 00:00 часов ")
+#
+# class Notebook(Goods,MixinLog):
+#     pass
+#
+#
+# n=Notebook('Hp',1.5,35000)
+# n1=Notebook('Hp',1.5,35000)
+# n.print_info()
+# n.save_sell_log()
+# n1=Notebook("Lg",2,40000)
+# n1.print_info()
+# n1.save_sell_log()
+#
+#
+#
+# Перегрузка операторов
+# 24*60*60=86400(
 
+# class Clock:
+#     DAY = 86400
+#
+#     def __init__(self, sec: int):
+#         if not isinstance(sec, int):
+#             raise ValueError("Секунды должны быть целым числом")
+#
+#         self.sec = sec % self.DAY
+#
+#     def get_format_time(self):
+#         s = self.sec % 60
+#         m = (self.sec // 60) % 60
+#         h = (self.sec // 3600) % 24
+#         return f"{Clock.get_form(h)}:{Clock.get_form(m)}:{Clock.get_form(s)}"
+#
+#     @staticmethod
+#     def get_form(x):
+#         return (str(x) if x > 9 else "0" + str(x))
+#
+#     def __add__(self, other):
+#
+#         if not isinstance(other,Clock):
+#             raise ArithmeticError("Операнды должны быть типа Clock")
+#         return Clock(self.sec + other.sec)
+#
+#     def __sub__(self, other):
+#
+#         if not isinstance(other, Clock):
+#             raise ArithmeticError("Операнды должны быть типа Clock")
+#         return Clock(self.sec - other.sec)
+#
+#     def __mul__(self, other):
+#
+#         if not isinstance(other,Clock):
+#             raise ArithmeticError("Операнды должны быть типа Clock")
+#         return Clock(self.sec * other.sec)
+#
+#     def __iadd__(self, other):
+#
+#         if not isinstance(other, Clock):
+#             raise ArithmeticError("Операнды должны быть типа Clock")
+#         return Clock(self.sec + other.sec)
+#
+#     def __eq__(self, other):
+#         # if self.sec==other.sec:
+#         #     return True
+#         # return False
+#         return self.sec==other.sec
+#
+#     def __gt__(self, other):
+#         #     return True
+#         # return False
+#         return self.sec>other.sec
+#
+#
+# c1 = Clock(300)
+# print(c1.get_format_time())
+# c2 = Clock(200)
+# c4 = Clock(300)
+# print(c2.get_format_time())
+# c3 = c2 - c1
+#
+#
+# print(c1.get_format_time())
+# print(c2.get_format_time())
+# print(c3.get_format_time())
+# if c1>c2:
+#     print("Первый больше")
+# else:
+#     print("Второй больше")
 
-class Loggermexin:
-    def log(self, message, filename='logfile.txt'):
-        with open(filename, 'a') as fh:
-            fh.write(message)
+#
+#
+#
+# class Student:
+#     def __init__(self,name, *marks):
+#         self.name=name
+#         self.marks=list(marks)
+#
+#
+#     def __getitem__(self, item):
+#         if 0<=item<len(self.marks):
+#             return self.marks[item]
+#         else:
+#             raise IndexError('Неверный индекс')
+#
+#     def __setitem__(self, key, value):
+#         if 0 <= key < len(self.marks) and isinstance(key,int):
+#             self.marks[key]=value
+#         elif key>=len(self.marks):
+#             off=key+1-len(self.marks)
+#             self.marks.extend([0]*off)
+#         else:
+#             raise IndexError('Неверный индекс')
+#
+#     def __delitem__(self, key, value):
+#         if not isinstance(key,int):
+#             reise
+#
+#         else:
+#             raise IndexError('Неверный индекс')
+#
+#
+# s1=Student("Сергей",5,5,5,3,4,5)
+# print(s1[4])
+# s1[7]=5
+# del s1[2]
+# print(s1.marks,s1[2])
 
-    def display(self, message):
-        Displayer.display(message)
-        self.log(message)
+# class Clock:
+#     DAY = 86400
+#
+#     def __init__(self, sec: int):
+#         if not isinstance(sec, int):
+#             raise ValueError("Секунды должны быть целым числом")
+#
+#         self.sec = sec % self.DAY
+#
+#     def get_format_time(self):
+#         s = self.sec % 60
+#         m = (self.sec // 60) % 60
+#         h = (self.sec // 3600) % 24
+#         return f"{Clock.get_form(h)}:{Clock.get_form(m)}:{Clock.get_form(s)}"
+#
+#     @staticmethod
+#     def get_form(x):
+#         return (str(x) if x > 9 else "0" + str(x))
+#
+#     def __getitem__(self, item):
+#         if not isinstance(item,str):
+#             raise ValueError("Ключ должен быть строкеой")
+#
+#         if item=="hour":
+#             return(self.sec//3600)%24
+#         elif  item=="min":
+#             return(self.sec//60)%60
+#         elif item == "sec":
+#                 return (self.sec%60)
+#         return "Htdthysq rk.x"
+#
+#     def __setitem__(self, key, value):
+#         if not isinstance(key, str):
+#             raise ValueError("Ключ должен быть строкой")
+#         if not isinstance(value, int):
+#             raise ValueError("Зрфчение должно быть целым числом")
+#
+#         h=self.sec%60
+#         m=(self.sec//60)%60
+#         s=(self.sec//3600)%24
+#         if key=="hour":
+#             self.sec=s+60*m+value*3600
+#         if key=="min":
+#             self.sec=s+60*value+h*3600
+#         if key=="sec":
+#             self.sec=value+60*m+h*3600
+#
+#
+#
+#
+# c1=Clock(80000)
+# print(c1.get_format_time())
+# c1["hour"]=10
+# c1["min"]=37
+# c1["sec"]=15
+#
+# print(c1["hour"],":",c1['min'],":",c1['sec'])
+#
+#
+#
+# Полиморфизм
+#
+# class Rectangle:
+#     def __init__(self,w,h):
+#         self.w=w
+#         self.h=h
+#
+#     def get_perimetr(self):
+#         return 2*(self.w+self.h)
+#
+# class Square:
+#     def __init__(self,a):
+#         self.a=a
+#
+#
+#     def get_perimetr(self):
+#
+#         return 4*self.a
+#
+# class Triangle:
+#         def __init__(self, a,b,c):
+#             self.a = a
+#             self.b = b
+#             self.c = c
+#
+#         def get_perimetr(self):
+#             return self.a+self.b+self.c
+#
+#
+# r1=Rectangle(1,2)
+# r2=Rectangle(3,4)
+#
+# s1=Square(1)
+# s2=Square(2)
+# t2=Triangle(3,4,5)
+# shape=[r1,r2,s1,s2,t2]
+# shape=[Triangle(3,4,5),Rectangle(1,2),Rectangle(3,4),s1,s2]
+# for  g in shape:
+#     print(g.get_perimetr())
+#
+# class Number:
+#     def __init__(self,value):
+#         self.value=value
+#
+#     def total(self,a):
+#         return self.value+int(a)
+#
+#
+# class Text:
+#     def __init__(self, value):
+#         self.value = value
+#
+#     def total(self, a):
+#         return (str(self.value) + str(a))
+#
+# t1=Number(10)
+# t2=Text(10)
+# print(t1.total(35))  #45
+# print(t2.total(35))  #1035
+#
+# class Cat:
+#     def __init__(self,name, alt):
+#         self.name=name
+#         self.alt=alt
+#     def info(self):
+#         return f"Я кот . Меня зовут {self.name}.Мне {self.alt} лет "
+#
+#     def sound(self):
+#         return f"Я кот . Меня зовут {self.name}.Я мяукаю "
+#
+#
+# class Dog:
+#     def __init__(self, name, alt):
+#         self.name = name
+#         self.alt = alt
+#
+#     def info(self):
+#         return f"Я пес . Меня зовут {self.name}.Мне {self.alt} лет "
+#
+#     def sound(self):
+#         return f"Я пес . Меня зовут {self.name}.Я громко гавкая "
+#
+# a1=Cat("Пират", "2.5")
+# print(a1.info())
+# print(a1.sound())
+# a2=Dog("Шарик","3")
+# a2.info()
+# a2.sound()
 
+# class Human:
+#     def __init__(self, surname, name, age):
+#         self.surname = surname
+#         self.name = name
+#         self.age = age
+#
+#     def info(self):
+#         return f'{self.surname} {self.name} {self.age}'
+#
+#
+# class Student(Human):
+#     def __init__(self, surname, name, age, v1, group, ball):
+#         self.v1 = v1
+#         self.group = group
+#         self.ball = ball
+#         super().__init__(surname, name, age)
+#
+#     def info(self):
+#         return f'{super().info()} {self.v1} {self.group} {self.ball}'
+#
+#
+# class Teacher(Human):
+#     def __init__(self, surname, name, age, sub, rating):
+#         self.sub = sub
+#         self.rating = rating
+#         super().__init__(surname, name, age)
+#
+#     def info(self):
+#         return f'{super().info()} {self.sub} {self.rating}'
+#
+#
+# class Graduate(Student):
+#     def __init__(self, surname, name, age, v1, group, ball, top):
+#         self.top = top
+#         super().__init__(surname, name, age, v1, group, ball)
+#
+#     def info(self):
+#
+#         return f'{super().info()} {self.top}'
+#
+#
+# group = [
+#     Student("Батодалаев", "Даши", 16, "ГК", "Web_011", 5),
+#     Student("Загидуллин", "Линар", 32, "РПО", "PD_011", 5),
+#     Graduate("Шугани", "Сергей", 15, "РПО", "PD_011", 5, "Защита персональных данных"),
+#     Teacher("Даньшин", "Андрей", 38, "Астрофизика", 110),
+#     Student("Маркин", "Даниил", 17, "ГК", "Python_011", 5),
+#     Teacher("Башкиров", "Алексей", 45, "Разработка приложений", 20)
+# ]
+#
+# for i in group:
+#     print(i.info())
+#
+#
+#
+#
+# class Cat:
+#     def __init__(self,name):
+#         self.name=name
+#
+#     def __repr__(self):
+#         return f"{self.__class__}:{self.name}"
+#
+#     def __str__(self):
+#         return f"{self.name}"
+#
+# cat=Cat("Пушок")
+# print(cat)
+#
+# #
+# class Point:
+#     def __init__(self,*args):
+#         print(args)
+#         self.__coord=args
+#
+#     def __len_(self):
+#         return len(self.__coord)
+#
+# p=Point(5,7,8)
+# print(len(p))
 
-class MySubClass(Loggermexin, Displayer):
-    def log(selfself, message, filename=""):
-        super().log(message, filename="subclass.txt")
+# class Point:
+#     __slots__ = ('x','y','__length')
+#
+#     def __init__(self,x,y):
+#         self.x=x
+#         self.y=y
+#         self.length=math.sqrt(x*x+y*y)
+#
+#     @property
+#     def length(self):
+#         return self.__length
+#
+#     @length.setter
+#     def length(self,value):
+#         self.__length=value
+#
+#
+#
+# pt=Point(1,2)
+# # pt.z=3
+# #
+# # print(pt.__dict__)
+# print(pt.length)
+# class Point:
+#     __slots__ = ('x','y')
+#
+#     def __init__(self,x,y):
+#         self.x=x
+#         self.y=y
+#
+# class Point3D(Point):
+#     __slots__ = ("z",)
+#     def __init__(self,x,y,z):
+#         super().__init__(x,y)
+#         self.z=z
+#
+# pt=Point(1,2)
+# pt3=Point3D(10,20,30)
+# pt3.z=30
+#
+# a=3
+# print(type(pt3))
+#
+#
+# Функторы
+# class Counter:
+#     def __init__(self):
+#         self.__counter=0
+#
+#     def  __call__(self, *args, **kwargs):
+#         self.__counter+=1
+#         print(self.__counter)
+#
+# c1=Counter()
+# c1()
+# c1()
+# c1()
+# c2=Counter()
+# c2()
+# c2()
+# c2()
+# c2()
+#
+#
+class StripChars:
+    def __init__(self,chars):
+        self.charc=chars
+    def __call_(self,*args, **kwargs):
+        if not isinstance(args[0],str):
+            raise ValueError("Arгумент дложен быть строко")
+        print(kwargs)
+        return  args[0].strip(self.__chars)
 
+s1=StripChars("?:!.: ")
+print(s1('Hello'))
 
-sub = MySubClass()
-sub.display("Cтрока будет отоброжаться и регистрироваться в файле ")
-print(MySubClass.mro())
+def strip_chars(chars):
+    def wrap(*args,**Kwargs):
+        if not isistance(args[0], str):
+            raise ValueError("Aргументы должны быть строкой")
+        return
