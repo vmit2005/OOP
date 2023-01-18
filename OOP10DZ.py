@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from math import sqrt
 
 
-class Chare:
+class Chare(ABC):
     def __init__(self, color):
         self.color = color
 
@@ -21,6 +21,7 @@ class Chare:
     @abstractmethod
     def painting(self):
         pass
+
 
 
 class Square(Chare):
@@ -131,7 +132,7 @@ class Triangle(Chare):
         b = self.b
         c = self.c
         a, b, c = sorted((a, b, c), reverse=True)  # Сортровка сторон
-        m = 20 / a  # масштаб
+        m = 40 / a  # масштаб
         a, b, c = (round(a * m, 0), round(b * m, 0), round(c * m, 0))
         """
         a- самая длинная сторона треугольника. Будет подошвой. Размер 20 знаков. float
@@ -156,7 +157,7 @@ class Triangle(Chare):
 
 
 
-q = [Square("red", 88), Rectangle("rgb", 38, 92), Triangle("RAL 1031", 4, 5, 8), Triangle("RAL 1031", 9, 7, 7)]
+q = [Square("red", 88), Rectangle("rgb", 38, 92), Triangle("RAL 1031", 5, 5, 8), Triangle("RAL 1031", 9, 4, 6)]
 for i in q:
     i.print_info()
     i.painting()

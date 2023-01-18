@@ -25,11 +25,8 @@ class Cat:
             for i in range(randint(1, 6)):
                 c=Cat(Cat.n_plus(), " ", Cat.M_F(self))
                 # print(c.get_cat())
-                print(type(c))
                 s1.append(c)
-
-        print (type(tuple(s1)))
-        return tuple(s1)
+        return s1
 
 
     def M_F(self):
@@ -48,46 +45,39 @@ class Cat:
         else:
             return
 
+
+    def add_name(self, name):
+        self.name=name
+
+    def get_number(self):
+        return self.number
+
 c1=Cat(1,"Murka","F")
 c2=Cat(2,"Barsik","M")
 c3=Cat(3,"Linda","F")
 c4=Cat(4,"Bandit","M")
 
+base=[c1,c2,c3,c4]
 
+class Cats():
 
-class Cats(Cat):
-    n=51 #Номера котов заняты до n
-
-
-    def __init__(self,*cats:Cat):
-        self.base=[]
-        for i in cats:
-            self.base.append(i)
-
-
-
-
-    def get_base(self):
-        for i in self.base:
-
+    @staticmethod
+    def get_base(base):
+        for i in base:
            print(i.get_cat())
 
-    def __add__(self, other):
-        print(self.base, other.base)
-
-        return self.base.extend(other.base)
-
-
-
-
-cc1=Cats(c1,c2,c3,c4)
+    @staticmethod
+    def add_name_base(base,number,name):
+        for i in base:
+            if i.get_number==number:
+                i.add_name(name)
 
 
-cc1.get_base()
-cc2=Cats(c1+c2)
+Cats.get_base(base)
+base.extend(c1+c2)
+Cats.get_base(base)
+Cats.get_base(c3+c4)
 
-print("1",type(cc1))
-print("2",type(cc2),cc2)
-print(type(cc1+cc2))
-# (cc1+cc2).get_base()
+
+
 

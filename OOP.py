@@ -91,8 +91,8 @@
 # print(p2.x)
 # Point.set_coord(p2,7,14)
 # print(p2.x)
-import asyncio
-import math
+# import asyncio
+# import math
 
 
 # class Humam:
@@ -1924,20 +1924,205 @@ import math
 # c2()
 #
 #
-class StripChars:
-    def __init__(self,chars):
-        self.charc=chars
-    def __call_(self,*args, **kwargs):
-        if not isinstance(args[0],str):
-            raise ValueError("Arгумент дложен быть строко")
-        print(kwargs)
-        return  args[0].strip(self.__chars)
+# class StripChars:
+#     def __init__(self,chars):
+#         self.charc=chars
+#     def __call_(self,*args, **kwargs):
+#         if not isinstance(args[0],str):
+#             raise ValueError("Arгумент дложен быть строко")
+#         print(kwargs)
+#         return  args[0].strip(self.__chars)
+#
+# s1=StripChars("?:!.: ")
+# print(s1('Hello'))
+#
+# def strip_chars(chars):
+#     def wrap(*args,**Kwargs):
+#         if not isistance(args[0], str):
+#             raise ValueError("Aргументы должны быть строкой")
+#         return
+# import random
+#
+#
+# class Cat:
+#     def __init__(self, name, pol):
+#         self.name = name
+#         self.pol = pol
+#
+#     def __str__(self):
+#         if self.pol == "M":
+#             return f"{self.name} is good boy!!!"
+#         elif self.pol == "F":
+#             return f"{self.name} is good girl!!!"
+#         else:
+#             return f"{self.name} is good Kitty!!!"
+#
+#     def __repr__(self):
+#         return f"Cat(name='{self.name}', sex='{self.pol}')"
+#
+#     def __add__(self, other):
+#
+#         if self.pol != other.pol:
+#              return [Cat("No name", random.choice(['M', 'F'])) for _ in range(random.randint(2,7))]
+#         else:
+#             return "Tипы не совместимы"
 
-s1=StripChars("?:!.: ")
-print(s1('Hello'))
 
-def strip_chars(chars):
-    def wrap(*args,**Kwargs):
-        if not isistance(args[0], str):
-            raise ValueError("Aргументы должны быть строкой")
-        return
+# cat1 = Cat("Tom", "M")
+# # print(cat1)
+# cat2 = Cat("Elsa", "F")
+# # print(cat2)
+# # print(cat1 + cat2)
+# cat3=Cat("ron","M")
+# # print(cat2)
+# # print(cat1 + cat2)
+# lst=(cat1, cat2, cat3)
+# b,c =random.choices(lst, k=2)
+# print (b+c)
+
+#
+#
+#
+#  Класс  как декоратор
+# class MyDcorator:
+#     def __init__(self,fn):
+#         self.func=fn
+#
+#     def __call__(self,a,b):
+#         print("перед вызовом функции")
+#         res=self.func(a,b)
+#         return str(res)+"\nпосле вызовом функции"
+#
+# @MyDcorator
+# def func(a,b):
+#     return a*b
+#
+# print(func(2,5))
+
+#
+# class Power:
+#     def  __init__(self,fn):
+#         self.func=fn
+#
+#     def __call__(self, a, b):
+#         res = self.func(a, b)**2
+#         return str(res)
+#
+#
+# @Power
+# def func(a, b):
+#     return a * b
+#
+#
+# print(func(2, 3))
+#
+# class MyDcorator:
+#     def __init__(self,arg):
+#         self.name=arg
+#
+#     def __call__(self,fn):
+#         def  wrap(a,b):
+#             print("перед вызовом функции")
+#             print(self.name,end=": ")
+#             fn(a,b)
+#             print("после вызовом функции")
+#         return wrap
+#
+#
+# @MyDcorator("test2")
+# def  func(a,b):
+#     print (a,b)
+#
+# func(2,5)
+#
+# Декорирование методов
+
+
+# def dec(fn):
+#     def wrap(*args, **kwargs):
+#         print("*" * 20)
+#         fn(*args, **kwargs)
+#         print("*" * 20)
+#
+#     return wrap
+#
+#
+# class Person:
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     @dec
+#     def info(self):
+#         print(f"{self.name}{self.surname}")
+#
+#
+# p1 = Person("Bиталий ", "Карасев")
+# p1.info()
+
+
+# Дескрипторы
+#__get__,__set__, __delete__
+#
+#
+# class StringD:
+#     def __init__(self,value):
+#         if value:
+#             self.set(value)
+#
+#
+#     def set(self,value):
+#         set.__value=value
+#
+#     def get(self):
+#         return self.__value
+#
+# class Person:
+#     def __init__(self,name,surname):
+#         self.__name=StringD(name)
+#         self.__surname=StringD(surname)
+#
+#     @property
+#     def name(self):
+#         return self.__name
+#     @name.setter
+#     def name(self,value):
+#         self.__name==value
+#
+#     @property
+#     def surname(self):
+#         return self.__surname
+#
+#     @name.setter
+#     def surname(self, value):
+#         self.__surname == value
+#
+# p=Person("Ivan","Petrov")
+# print(p.name.get(),p.surname.get)
+#
+class Validastring:
+    def __set_name__(self, owner, name):
+        self.__name=name
+
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.__name]
+
+    def __set__(self, instance, value):
+        if not isinstance(value, str):
+            raise ValueError(f"{self.__name}должно быть строкой")
+        instance.__dict__[self.__name]=value
+
+
+
+class Person:
+    name=Validastring()
+    surname=Validastring()
+
+    def __init__(self,name,surname):
+        self.name=name
+        self.surname=surname
+
+p=Person("Ivan", "Petrov")
+p.surname="oleg"
+print(p.name)
+print(p.surname)
