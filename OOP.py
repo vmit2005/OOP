@@ -2062,7 +2062,7 @@
 
 
 # Дескрипторы
-#__get__,__set__, __delete__
+# __get__,__set__, __delete__
 #
 #
 # class StringD:
@@ -2100,29 +2100,209 @@
 # p=Person("Ivan","Petrov")
 # print(p.name.get(),p.surname.get)
 #
-class Validastring:
-    def __set_name__(self, owner, name):
-        self.__name=name
+# class Validastring:
+#     def __set_name__(self, owner, name):
+#         self.__name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.__name]
+#
+#     def __set__(self, instance, value):
+#         if not isinstance(value, str):
+#             raise ValueError(f"{self.__name}должно быть строкой")
+#         instance.__dict__[self.__name] = value
+#
+#
+# class Person:
+#     name = Validastring()
+#     surname = Validastring()
+#
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#
+# p = Person("Ivan", "Petrov")
+# p.surname = "oleg"
+# print(p.name)
+# print(p.surname)
+#
+#
+# class NonNegative:
+#     def __set_name__(self, owner, name):
+#         self.name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#     def __set__(self, instance, value):
+#         if value < 0:
+#             raise ValueError('Значение должно быть больше 0')
+#         instance.__dict__[self.name] = value
+#
+#
+# class Order:
+#     price = NonNegative()
+#     qty = NonNegative()
+#
+#     def __init__(self, name, price, qty):
+#         self.name = name
+#         self.price = price
+#         self.qty = qty
+#
+#     def total(self):
+#         return self.price * self.qty
+#
+#
+# a = Order('apple', 5, 10)
+# a.price = 10
+# print(a.total())
+#
+#
+# class Integer:
+#     @classmethod
+#     def verify_coord(coord):
+#         if not isinstance(coord, int):
+#             raise TypeError(f'Координата {coord} должнf быть больше 0')
+#
+#     def __set_name__(self, owner, name):
+#         self.name = "_" + name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#     def __set__(self, instance, value):
+#         instance.__dict__[self.name] = value
+#
+#
+# class Point3D:
+#     x = Integer()
+#     y = Integer()
+#     z = Integer()
+#
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#
+# p1 = Point3D(1, 2, 3)
+# print(p1.__dict__)
+# print(p1.x)
 
-    def __get__(self, instance, owner):
-        return instance.__dict__[self.__name]
 
-    def __set__(self, instance, value):
-        if not isinstance(value, str):
-            raise ValueError(f"{self.__name}должно быть строкой")
-        instance.__dict__[self.__name]=value
+# class Integer:
+#     @classmethod
+#     def verify_coord(coord):
+#         if not isinstance(coord, int):
+#             raise TypeError(f'Координата {coord} должнf быть больше 0')
+#
+#     def __set_name__(self, owner, name):
+#         self.name = "_" + name
+#
+#     def __get__(self, instance, owner):
+#         # return instance.__dict__[self.name]
+#         return getattr(instance,self.name)
+#
+#     def __set__(self, instance, value):
+#         # instance.__dict__[self.name] = value
+#         setattr(instance,self.name,value)
+#
+#
+# class Point3D:
+#     x = Integer()
+#     y = Integer()
+#     z = Integer()
+#
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#
+# p1 = Point3D(1, 2, 3)
+#
+#
+# print(p1.__dict__)
+# print(p1.x)
 
 
 
-class Person:
-    name=Validastring()
-    surname=Validastring()
+#
+# class MyClass:
+#     pass
+#
+#
+# obj = MyClass()
+# obj.a = 1
+# obj.b = 2
+# obj.i = 3
+# obj.ireal = 3.5
+# obj.integer = 4
+# obj.z = 5
+#
+#
+# def incIntsI(obj):
+#     for name in obj.__dict__.keys():
+#         if name.startswith('i'):
+#             val = getattr(obj, name)
+#             if isinstance(val, int):
+#                 setattr(obj, name, val + 1)
+#
+#
+# print(obj.__dict__)
+# incIntsI(obj)
+# print(obj.__dict__)
+#
+# class Integer:
+#     def __set_name__(self, owner, name):
+#         self.name = "_" + name
+#
+#     def __get__(self, instance, owner):
+#         # return instance.__dict__[self.name]
+#         return getattr(instance, self.name)
+#
+#
+# class Point3D:
+#     x = Integer()
+#     y = Integer()
+#     z = Integer()
+#
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#
+# p1 = Point3D(1, 2, 3)
+# print(p1.__dict__)
+# print(p1.y)
+#
+#
+#
+# Создание модулей
 
-    def __init__(self,name,surname):
-        self.name=name
-        self.surname=surname
+from geometri import rect,sq,trian
+# from geometri.rect import *
+# from geometri.sq import *
+# import geometri.trian
+# from geometri import rect
+# from geometri import sq
+# from geometri import trian
+# from geometri import *
 
-p=Person("Ivan", "Petrov")
-p.surname="oleg"
-print(p.name)
-print(p.surname)
+
+
+r1 = rect.Rectangle(1, 2)
+r2 = rect.Rectangle(3, 4)
+
+s1 = sq.Square(10)
+s2 = sq.Square(20)
+
+t1 = trian.Triangle(1, 2, 3)
+t2 = trian.Triangle(4, 5, 6)
+
+shape = [r1, r2, s1, s2, t1, t2]
+
+for g in shape:
+    print(g.get_perimetr())
