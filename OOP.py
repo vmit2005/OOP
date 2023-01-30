@@ -2227,7 +2227,6 @@
 # print(p1.x)
 
 
-
 #
 # class MyClass:
 #     pass
@@ -2282,7 +2281,7 @@
 #
 # Создание модулей
 
-from geometri import rect,sq,trian
+# from geometri import rect,sq,trian
 # from geometri.rect import *
 # from geometri.sq import *
 # import geometri.trian
@@ -2292,17 +2291,242 @@ from geometri import rect,sq,trian
 # from geometri import *
 
 
+# r1 = rect.Rectangle(1, 2)
+# r2 = rect.Rectangle(3, 4)
+#
+# s1 = sq.Square(10)
+# s2 = sq.Square(20)
+#
+# t1 = trian.Triangle(1, 2, 3)
+# t2 = trian.Triangle(4, 5, 6)
+#
+# shape = [r1, r2, s1, s2, t1, t2]
+#
+# for g in shape:
+#     print(g.get_perimetr())
+#
+#
+#
+# from geometri.car import electrocar
+#
+# def run():
+#     e_car=electrocar.Electrocar("Tesla","T",2020,5000)
+#     e_car.show_car()
+#     e_car.deascription_battery()
+# print(__name__)
+# if __name__=='__main__':
+#     run()
+#
+#
+#
+#
+# Упаковка Данных
+#  Кодирование(cерилизация)
+#  Декодирование(десериалдизация)
+#  1.marshal(.pyc)
+# 2.pickle
+# 3.json
+#
+# dump()- сохраняет данные  в файл
+# load()-читает данные из открытого файла
+# dumps()-сохраняет данные в строку (в память)
+# loads()-считывает данные из строки (из памяти)
+import pickle
+#
+# filename='basket.txt'
+# shop_list={
+#     "фрукты":["яблоки","манго"],
+#     "овощи":["редиска"],
+#     "бюджет":100
+# }
+# with open(filename,'wb') as fh:
+#     pickle.dump(shop_list,fh)
+#
+# with open(filename,'rb') as fh:
+#     shop=pickle.load(fh)
+# print(shop)
+# class Test:
+#     num=35
+#     st="Привет"
+#     lst=[1,2,3]
+#     d={'first':'a','second':2}
+#     tpl=(22,33)
+#
+#     def __str__(self):
+#         return f"Число{test.num}\nCтрока:{test.st}"
+# obj=Test()
+# my_obj=pickle.dumps(obj)
+# print(f"Серилизация в строку: \n{my_obj}\n")
+# l_obj=pickle.loads(my_obj)
+# print(f"Серилизация в строку: \n{my_obj}\n")
+#
+#
+#
+# class Test2:
+#     def __init__(self):
+#         self.a=35
+#         self.b="test"
+#         self.c=lambda x: x*x
+#
+#     def __str__(self):
+#         return f"{self.a},{self.b}{self.c}"
+#     def __getstate__(self):
+#         attr=self.__dict__.copy()
+#         del attr['c']
+#
+#         return attr
+#
+#     def __setstate__(self, state):
+#         self.__dict__=state
+#         self.c=lambda x: x*x
+#
+# item1=Test2()
+#
+# item2=pickle.dumps(item1)
+# item3=pickle.loads(item2)
+# print(item3.__dict__)
+#
+#
+#
+import json
 
-r1 = rect.Rectangle(1, 2)
-r2 = rect.Rectangle(3, 4)
+data = {'name': 'Игорь',
+        'hobbies': ('running', 'sky diving'),
+        'age': 20,
+        'children': [
+            {
+                'firstName': 'Alice',
+                'age': 5
+            },
+            {
+                'firstName': 'Bob',
+                'age': 8
+            }
+        ]
+        }
 
-s1 = sq.Square(10)
-s2 = sq.Square(20)
 
-t1 = trian.Triangle(1, 2, 3)
-t2 = trian.Triangle(4, 5, 6)
+# with open("data_file.json", "w") as fw:
+#     json.dump(data, fw, indent=4)
+#
+# with open("data_file.json", "r") as fw:
+#     data=json.load(fw)
+#     print(data)
 
-shape = [r1, r2, s1, s2, t1, t2]
+# json_string=json.dumps(data, ensure_ascii=False)
+# print(json_string)
+# data=json.loads(json_string)
+# print(data)
+# with open("triangle.json", "w") as fw:
+#     json.dump(data, fw, indent=4)
+# import json
+# from random import choice
+#
+#
+# def get_person():
+#     name = ''
+#     tel = ''
+#     letter = ["a", "b", "c", "d", "e", "f", "g", "h"]
+#     nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#     while len(name) != 7:
+#         name += choice(letter)
+#     while len(tel) != 10:
+#         tel += choice(nums)
+#
+#     person = {
+#         'name': name,
+#         'tel': tel
+#     }
+#     return person
+#
+#
+# def write_json(person_dict):
+#     try:
+#         data = json.load(open('persons.json'))
+#     except FileNotFoundError:
+#         data = []
+#
+#     data.append(person_dict)
+#     with open("persons.json", "w") as f:
+#         json.dump(data, f, indent=2)
+#
+#
+#
+# for i in range(5):
+#     write_json(get_person())
 
-for g in shape:
-    print(g.get_perimetr())
+class Student:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+    def __str__(self):
+        # a=""
+        # for i in self.marks:
+        #     a+=f"{i}, "
+        a = ', '.join(map(str, self.marks))
+        return f"Студент: {self.name}: {a}"  # {', '.join(map(str,self.marks))}"
+
+    def add_marks(self, mark):
+        self.marks.append(mark)
+
+    def delete_mark(self, index):
+        self.marks.pop(index)
+
+    def edit_mark(self, index, new_mark):
+        self.marks[index] = new_mark
+
+    def average_marks(self):
+        return round(sum(self.marks) / len(self.marks), 2)
+
+
+class Group:
+    def __init__(self, students, group):
+        self.students = students
+        self.group = group
+
+    def __str__(self):
+        # a=""
+        # for i in self.students:
+        #     a+=str(i)+"\n"
+        a = '\n'.join(map(str, self.students))
+        return f"Группа: {self.group}\n{a}"
+
+    def add_student(self, student):
+        self.students.append(student)
+
+    def remove_student(self, index):
+        return self.students.pop(index)
+
+    @staticmethod
+    def change_group(group1, group2, index):
+        return group2.add_student(group1.remove_student(index))
+
+
+st1 = Student('Bodnya', [5, 4, 3, 2, 1])
+
+st2 = Student("Nikolaenko", [2, 3, 4, 5, 3, 4])
+st3 = Student("Birukov", [2, 3, 4, 5, 3, 4])
+sts = [st1, st2]
+my_group = Group(sts, "ГК Питон")
+my_group.add_student(st3)
+print(my_group)
+print()
+my_group.remove_student(1)
+print(my_group)
+group22 = [st2]
+my_group2 = Group(group22, "ГК Web")
+
+print(my_group2)
+Group.change_group(my_group, my_group2, 0)
+print(my_group)
+print(my_group2)
+
+# print (st1)
+# st1.add_marks(6)
+# print (st1)
+# st1.delete_mark(2)
+# print (st1)
+# st1.edit_mark(4,3)
+# print (st1)
+# print(st1.average_marks())
